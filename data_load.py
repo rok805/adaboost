@@ -6,6 +6,7 @@ Created on Fri Dec  4 11:31:55 2020
 """
 
 import pandas as pd
+import numpy as np
 
 diabetes = pd.read_csv('data/diabetes_csv.csv', header=None)
 liver = pd.read_csv('data/Indian Liver Patient Dataset (ILPD).csv', header=None)
@@ -15,4 +16,3 @@ for i in ionosphere:
     ionos.append(i.split(','))
 ionosphere = pd.DataFrame(ionos)    
 del ionos
-
