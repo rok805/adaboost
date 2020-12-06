@@ -10,6 +10,7 @@ from sklearn.tree import DecisionTreeClassifier
 import pandas as pd
 import numpy as np
 import math
+from sklearn.model_selection import train_test_split
 
 ##############################################################################
 
@@ -73,13 +74,13 @@ ionosphere[34] = new_class
 X = np.array(diabetes.iloc[:, :-1])
 y = np.array(diabetes.iloc[:, -1])
 
-# liver
-X = np.array(liver.iloc[:, :-1])
-y = np.array(liver.iloc[:, -1])
+# # liver
+# X = np.array(liver.iloc[:, :-1])
+# y = np.array(liver.iloc[:, -1])
 
-# ionosophere
-X = np.array(ionosphere.iloc[:, :-1])
-y = np.array(ionosphere.iloc[:, -1])
+# # ionosophere
+# X = np.array(ionosphere.iloc[:, :-1])
+# y = np.array(ionosphere.iloc[:, -1])
 
 
 ##############################################################################
@@ -92,6 +93,7 @@ class AdaBoost:
         self.stump_weights = None
         self.errors = None
         self.sample_weights = None
+        self.ht = None
 
     def _check_X_y(self, X, y):
         assert set(y) == {1, -1}
@@ -107,6 +109,7 @@ def fit(self, X: np.ndarray, y: np.ndarray, iters: int):
     self.stumps = np.zeros(shape=iters, dtype=object)
     self.stump_weights = np.zeros(shape=iters)
     self.errors = np.zeros(shape=iters)
+    self.ht = np.zeros(shape=(iters, n))
     
     
     # initialize weights uniformly
@@ -155,10 +158,20 @@ def predict(self, X):
 
 ##############################################################################
 
+result=[]
+for rs in [1,2,3,4,5]:
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        y,
+                                                        test_size=0.2,
+                                                        shuffle=False,
+                                                        random_state=rs)
+    AdaBoost.fit = fit
+    AdaBoost.predict = predict
 
-AdaBoost.fit = fit
-AdaBoost.predict = predict
+    clf = AdaBoost().fit(X_train, y_train, iters=10)
 
-clf = AdaBoost().fit(X, y, iters=10)
-
-train_err = (clf.predict(X) != y).mean()
+    test_err = (clf.predict(X_test) != y_test).mean()
+    result.append(test_err)
+np.mean(result)
+    
+    
