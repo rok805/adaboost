@@ -16,7 +16,7 @@ data set in UCI.
  including baseline Adaboost, RAdaboost, Dadaboost.
  In case of Dadaboost, In reference(1), diverse AdaBoost is maded based Gentle Adaboost, but I made DadaBoost based Adaboost for comparing Adaboost and RadaBoost, DadaBoost.
 
-* the awesome baseline code is in in #### adaboost.py using reference(3). 
+* the awesome baseline code is in adaboost.py using reference(3). 
 
 
 
