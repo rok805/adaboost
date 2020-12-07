@@ -1,11 +1,10 @@
 # adaboost
-basic adaboost 를 decision tree 기반으로 구현하고,
-A new diverse adaboost classifier 와 Robust Alternating AdaBoost 논문을 구현.
+basic adaboost is implemented based decision tree classifier(max_depth=1),
+Implement of A new diverse adaboost classifier and Robust Alternating AdaBoost.
 
-기존의 AdaBoost의 weak learner 는 Decision tree classifier(max_depth=1)를 사용.
 
 ## data)
-UCI 에 게재된 data set을 사용.
+data set in UCI.
 
 1. Diabetes
 2. Indian Liver Diseases
